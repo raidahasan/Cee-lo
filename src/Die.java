@@ -1,61 +1,61 @@
 public class Die {
 
     int res;
-    int[] three = new int[3];
+    Die[] three = new Die[3];
     public Die(){
-        res = 0;
-        three = new int[3];
+        res = (int)(Math.random()*6)+1;
     }
 
     public int getRoll(){return res;}
-    public int[]getThreeRolls(){return three;}
+    public Die[] getThreeRolls(){return three;}
 
-    public int rollDie(){
-        res = (int)(Math.random()*6)+1;
-        return res;
-    }
-
-    public int[] rollThree(){
-        three[0]=rollDie();
-        three[1]=rollDie();
-        three[2]=rollDie();
+    public Die[] rollThree(){
+        three[0]= new Die();
+        three[1]= new Die();
+        three[2]= new Die();
         return three;
     }
     public void printResult(){
+        String str = "───────────\n";
         if(res ==1){
-            System.out.println("\n * \n\n");
+            str+="│         │\n│    ○    │\n│         │";
         }else if(res==2){
-            System.out.println("*\n \n  *\n");
+            str+="│  ○      │\n│         │\n│      ○  │";
         }else if(res==3){
-            System.out.println("*\n *\n  *\n");
+            str+="│  ○      │\n│    ○    │\n│      ○  │";
         }else if(res==4){
-            System.out.println("* *\n\n* *\n");
+            str+="│  ○   ○  │\n│         │\n│  ○   ○  │";
         }else if(res==5){
-            System.out.println("* *\n *\n* *\n");
+            str+="│  ○   ○  │\n│         │\n│  ○   ○  │";
         }else{
-            System.out.println("* *\n* *\n* *\n");
+            str+="│  ○   ○  │\n│  ○   ○  │\n│  ○   ○  │";
         }
+        str+="\n───────────\n";
+        System.out.println(str);
     }
 
     public void printResult(int res){
+        String str = "───────────\n";
         if(res ==1){
-            System.out.println("\n * \n\n");
+            str+="│         │\n│    ○    │\n│         │";
         }else if(res==2){
-            System.out.println("*\n \n  *\n");
+            str+="│  ○      │\n│         │\n│      ○  │";
         }else if(res==3){
-            System.out.println("*\n *\n  *\n");
+            str+="│  ○      │\n│    ○    │\n│      ○  │";
         }else if(res==4){
-            System.out.println("*  *\n\n*  *\n");
+            str+="│  ○   ○  │\n│         │\n│  ○   ○  │";
         }else if(res==5){
-            System.out.println("*  *\n *\n*  *\n");
+            str+="│  ○   ○  │\n│         │\n│  ○   ○  │";
         }else{
-            System.out.println("*  *\n*  *\n*  *\n");
+            str+="│  ○   ○  │\n│  ○   ○  │\n│  ○   ○  │";
         }
+        str+="\n───────────\n";
+        System.out.println(str);
     }
 
     public void printThree(){
-        printResult(three[0]);
-        printResult(three[1]);
-        printResult(three[2]);
+        printResult(three[0].getRoll());
+        printResult(three[1].getRoll());
+        printResult(three[2].getRoll());
     }
 }

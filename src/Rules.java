@@ -27,5 +27,6 @@ public class Rules {
         }else{
             str = "reroll";
         }
+        return str;
     }
 }

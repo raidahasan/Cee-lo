@@ -1,15 +1,15 @@
 public class Die {
 
     int res;
-    Die[] three = new Die[3];
+    static Die[] three = new Die[3];
     public Die(){
         res = (int)(Math.random()*6)+1;
     }
 
     public int getRoll(){return res;}
-    public Die[] getThreeRolls(){return three;}
+    public static Die[] getThreeRolls(){return three;}
 
-    public Die[] rollThree(){
+    public static Die[] rollThree(){
         three[0]= new Die();
         three[1]= new Die();
         three[2]= new Die();

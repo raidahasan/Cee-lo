@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Die {
 
     int res;
@@ -57,5 +59,32 @@ public class Die {
         printResult(three[0].getRoll());
         printResult(three[1].getRoll());
         printResult(three[2].getRoll());
+    }
+
+    public String determine(){
+        String str = "";
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(three[0].getRoll());
+        list.add(three[1].getRoll());
+        list.add(three[2].getRoll());
+        if(list.contains("4")&&list.contains("5")&&list.contains("6")){
+            str = "true";
+        }else if((list.get(0)==list.get(1)) && (list.get(2)==list.get(1))){
+            str = "true";
+        }else if(list.contains("1")&&list.contains("2")&&list.contains("3")){
+            str = "false";
+        }else if((list.get(0)==list.get(1))){
+            Banker.bankerPoints += list.get(2);
+            str = "false";
+        }else if((list.get(1)==list.get(2))) {
+            Banker.bankerPoints += list.get(0);
+            str = "false";
+        }else if((list.get(0)==list.get(2))) {
+            Banker.bankerPoints += list.get(1);
+            str = "false";
+        }else{
+            str = "reroll";
+        }
+        return str;
     }
 }

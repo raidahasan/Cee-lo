@@ -2,9 +2,13 @@ public class Player {
     int coins = 700;
     String name = "";
     int currentAmountWagered;
+    int playerPoints;
+    Die die = new Die();
+
     public Player(String name){
         coins = 700;
         this.name = name;
+        playerPoints = 0;
     }
     public String getName(){
         return name;
@@ -18,20 +22,11 @@ public class Player {
     public void setWager(int wagered){
         currentAmountWagered = wagered;
     }
+    public void setPlayerPoints(int points){
+        playerPoints = points;
+    }
     public void addCoins(int addOrSub){
         coins += addOrSub;
     }
-    public void turn(){
-        Die die = new Die();
-        die.rollThree();
-        die.printThree();
-        try {
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            System.out.println("error");
-        }
-        if(die.determine().equals(true)){
 
-        }
-    }
 }

@@ -4,6 +4,8 @@ public class Die {
 
     int res;
     static Die[] three = new Die[3];
+    ArrayList<Integer> list = new ArrayList<Integer>();
+
     public Die(){
         res = (int)(Math.random()*6)+1;
     }
@@ -11,7 +13,7 @@ public class Die {
     public int getRoll(){return res;}
     public static Die[] getThreeRolls(){return three;}
 
-    public static Die[] rollThree(){
+    public Die[] rollThree(){
         three[0]= new Die();
         three[1]= new Die();
         three[2]= new Die();
@@ -59,29 +61,60 @@ public class Die {
         printResult(three[0].getRoll());
         printResult(three[1].getRoll());
         printResult(three[2].getRoll());
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
     }
 
     public String determine(){
         String str = "";
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        list = new ArrayList<Integer>();
         list.add(three[0].getRoll());
         list.add(three[1].getRoll());
         list.add(three[2].getRoll());
-        if(list.contains("4")&&list.contains("5")&&list.contains("6")){
+        if(list.contains(4)&&list.contains(5)&&list.contains(6)){
             str = "true";
         }else if((list.get(0)==list.get(1)) && (list.get(2)==list.get(1))){
             str = "true";
-        }else if(list.contains("1")&&list.contains("2")&&list.contains("3")){
+        }else if(list.contains(1)&&list.contains(2)&&list.contains(3)){
             str = "false";
         }else if((list.get(0)==list.get(1))){
-            Banker.bankerPoints += list.get(2);
-            str = "false";
+            Banker.bankerPoints += three[2].getRoll();
+            str = "score";
         }else if((list.get(1)==list.get(2))) {
-            Banker.bankerPoints += list.get(0);
-            str = "false";
+            Banker.bankerPoints += three[0].getRoll();
+            str = "score";
         }else if((list.get(0)==list.get(2))) {
-            Banker.bankerPoints += list.get(1);
+            Banker.bankerPoints += three[1].getRoll();
+            str = "score";
+        }else{
+            str = "reroll";
+        }
+        return str;
+    }
+    public String determine(Player player){
+        String str = "";
+        list = new ArrayList<Integer>();
+        list.add(three[0].getRoll());
+        list.add(three[1].getRoll());
+        list.add(three[2].getRoll());
+        if(list.contains(4)&&list.contains(5)&&list.contains(6)){
+            str = "true";
+        }else if((list.get(0)==list.get(1)) && (list.get(2)==list.get(1))){
+            str = "true";
+        }else if(list.contains(1)&&list.contains(2)&&list.contains(3)){
             str = "false";
+        }else if((list.get(0)==list.get(1))){
+            player.setPlayerPoints(three[2].getRoll());
+            str = "score";
+        }else if((list.get(1)==list.get(2))) {
+            player.setPlayerPoints(three[0].getRoll());
+            str = "score";
+        }else if((list.get(0)==list.get(2))) {
+            player.setPlayerPoints(three[1].getRoll());
+            str = "score";
         }else{
             str = "reroll";
         }

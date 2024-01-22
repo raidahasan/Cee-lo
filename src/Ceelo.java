@@ -10,6 +10,7 @@ public class Ceelo {
     Die die = new Die();
 
     public Ceelo() {
+        //allows player to play again
         while(dcj) {
             totalWager = 0;
             System.out.println("\n      Main Menu\n. . . . . . . . . . .\n" + "Top Score: " + topScore + " coins");
@@ -27,8 +28,10 @@ public class Ceelo {
             }
         }
     }
-
+    //returns total wager
     public static int getTotalWager(){return totalWager;}
+
+    //main function for the code, keeps track of the input and determine and print results
     public void play() {
         totalWager = 0;
         enterBets();
@@ -107,6 +110,7 @@ public class Ceelo {
         }
     }
 
+    //to get bets placed by each player, and total the wagers
     public void enterBets(){
         System.out.println("\nEnter your bets \n");
         if (p1.getCoins() > 0) {
@@ -141,6 +145,7 @@ public class Ceelo {
         }
     }
 
+    //collects players' names
     public void introduce(){
         System.out.print("Player 1, enter your name: ");
         String name = scan.nextLine();
@@ -152,6 +157,8 @@ public class Ceelo {
         name = scan.nextLine();
         p3 = new Player(name);
     }
+
+    //adds and subtracts from chips depending on results from die rolled
     public void playerTurn(Player player){
         Die die = new Die();
         boolean result = true;
@@ -194,6 +201,8 @@ public class Ceelo {
             }
         }
     }
+
+    //prints everyone's general info
     public void printInfo(){
         System.out.println("\nBanker Chips :  " + Banker.bankerCoins + "\nBanker Points: " + Banker.bankerPoints);
         if(p1.getCoins()>0){

@@ -7,6 +7,7 @@ public class Banker {
     public static boolean getwinOrLose(){return winOrLose;}
 
 
+    //determines results of banker's rolls
     public static void turn(){
         Die die = new Die();
         boolean g = true;

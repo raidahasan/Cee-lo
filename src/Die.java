@@ -19,6 +19,7 @@ public class Die {
         three[2]= new Die();
     }
 
+    //prints the value of the dice
     public void printResult(int res){
         String str = "───────────\n";
         if(res ==1){
@@ -38,12 +39,14 @@ public class Die {
         System.out.println(str);
     }
 
+    //prints all three die
     public void printThree(){
         printResult(three[0].getRoll());
         printResult(three[1].getRoll());
         printResult(three[2].getRoll());
     }
 
+    //determines the result of the banker's role accoridng to ceelo rules
     public String determine(){
         String str = "";
         list = new ArrayList<Integer>();
@@ -70,6 +73,8 @@ public class Die {
         }
         return str;
     }
+
+    //determines tbe result of the player's die based on the rules of ceelo
     public String determine(Player player){
         String str = "";
         list = new ArrayList<Integer>();

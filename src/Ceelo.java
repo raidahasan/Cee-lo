@@ -64,17 +64,17 @@ public class Ceelo {
                 }
             }
             if (p1.getCoins() > p2.getCoins() && p1.getCoins() > p2.getCoins()) {
-                System.out.println("You broke the bank! " + p1.getName() + " wins!");
+                System.out.println(ConsoleUtility.CYAN + "You broke the bank! " + p1.getName() + " wins!" + ConsoleUtility.RESET);
                 if(p1.getCoins()>topScore){
                     topScore = p1.getCoins();
                 }
             } else if (p2.getCoins() > p3.getCoins() && p2.getCoins() > p1.getCoins()) {
-                System.out.println("You broke the bank! " + p2.getName() + " wins!");
+                System.out.println(ConsoleUtility.CYAN + "You broke the bank! " + p2.getName() + " wins!" + ConsoleUtility.RESET);
                 if(p2.getCoins()>topScore){
                     topScore = p2.getCoins();
                 }
             } else if (p3.getCoins() > p2.getCoins() && p3.getCoins() > p1.getCoins()) {
-                System.out.println("You broke the bank! " + p3.getName() + " wins!");
+                System.out.println(ConsoleUtility.CYAN + "You broke the bank! " + p3.getName() + " wins!" + ConsoleUtility.RESET);
                 if(p3.getCoins()>topScore){
                     topScore = p3.getCoins();
                 }
@@ -82,7 +82,7 @@ public class Ceelo {
                 printInfo();
                 System.out.println("The Banker won\n");
             }else{
-                System.out.println("You broke the bank! There is a tie between players ");
+                System.out.println(ConsoleUtility.CYAN + "You broke the bank! There is a tie between players " + ConsoleUtility.RESET);
                 printInfo();
                 if(p1.getCoins()==p2.getCoins()){
                     if(p2.getCoins()>topScore){
@@ -99,7 +99,7 @@ public class Ceelo {
                 }
             }
         }else if(Banker.getwinOrLose()){
-            System.out.println("The Banker won\n");
+            System.out.println(ConsoleUtility.RED + "The Banker won\n" + ConsoleUtility.RESET);
             p1.addCoins(p1.getCurrentAmountWagered()*-1);
             p2.addCoins(p2.getCurrentAmountWagered()*-1);
             p3.addCoins(p3.getCurrentAmountWagered()*-1);

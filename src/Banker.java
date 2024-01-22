@@ -28,7 +28,7 @@ public class Banker {
             } else if (die.determine().equals("score")) {
                 bankerPoints = 0;
                 die.determine();
-                System.out.println("Banker score added");
+                System.out.println("Banker score added\n");
                 go = true;
                 g = false;
             } else if (die.determine().equals("reroll")) {

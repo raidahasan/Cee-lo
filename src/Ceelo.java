@@ -11,6 +11,7 @@ public class Ceelo {
     public Ceelo(){
         totalWager = 0;
         introduce();
+        System.out.println("\nYou are all starting with 700 coins ");
         play();
 
     }
@@ -20,40 +21,37 @@ public class Ceelo {
     public void play() {
         totalWager = 0;
         enterBets();
-        System.out.println("\nYou are all starting with 700 coins \n");
-        System.out.println("The Banker's turn");
+        System.out.println("\nThe Banker's turn");
         Banker.turn();
         printInfo();
         if (Banker.getGo()) {
             while (Banker.bankerCoins > 0 && (p1.getCoins() > 0 || p2.getCoins() > 0 || p3.getCoins() > 0)) {
                 if (p1.getCoins() > 0) {
-                    System.out.println(p1.getName() + "'s turn");
+                    System.out.println("\n"  + p1.getName() + "'s turn");
                     playerTurn(p1);
-                    System.out.println(p1.getName() + " Coins : " + p1.getCoins() + "\n" + p1.getName() + " Points : " + p1.playerPoints);
+                    System.out.println("\n" + p1.getName() + " Coins : " + p1.getCoins() + "\n" + p1.getName() + " Points : " + p1.playerPoints + "\n");
                 }
                 if (p2.getCoins() > 0) {
-                    System.out.println(p2.getName() + "'s turn");
+                    System.out.println("\n" +p2.getName() + "'s turn");
                     playerTurn(p2);
-                    System.out.println(p2.getName() + " Coins : " + p2.getCoins() + "\n" + p2.getName() + " Points : " + p2.playerPoints);
+                    System.out.println("\n" + p2.getName() + " Coins : " + p2.getCoins() + "\n" + p2.getName() + " Points : " + p2.playerPoints + "\n");
                 }
                 if (p3.getCoins() > 0) {
-                    System.out.println(p3.getName() + "'s turn");
+                    System.out.println("\n" + p3.getName() + "'s turn");
                     playerTurn(p3);
-                    System.out.println(p3.getName() + " Coins : " + p3.getCoins() + "\n" + p3.getName() + " Points : " + p3.playerPoints);
+                    System.out.println("\n" + p3.getName() + " Coins : " + p3.getCoins() + "\n" + p3.getName() + " Points : " + p3.playerPoints + "\n");
 
                 }
                 if(p1.getCoins()<=0 && p2.getCoins()<=0 && p3.getCoins()<=0){
+                    printInfo();
                     System.exit(0);
                 }
                 if(Banker.bankerCoins>0) {
                     printInfo();
                     totalWager = 0;
                     enterBets();
-                    System.out.println("The Banker's turn");
+                    System.out.println("\nThe Banker's turn");
                     Banker.turn();
-                }else{
-                    System.exit(0);
-                    break;
                 }
             }
             if (p1.getCoins() > p2.getCoins() && p1.getCoins() > p2.getCoins()) {
@@ -67,6 +65,7 @@ public class Ceelo {
                 System.exit(0);
             } else {
                 System.out.println("You broke the bank! There is a tie between players ");
+                printInfo();
                 System.exit(0);
             }
         }else if(Banker.getwinOrLose()){
@@ -80,22 +79,31 @@ public class Ceelo {
     }
 
     public void enterBets(){
-        System.out.println("Enter your bets \n");
+        System.out.println("\nEnter your bets \n");
         if (p1.getCoins() > 0) {
             System.out.print(p1.getName() + ": ");
             int wager = scan.nextInt();
+            if(wager>p1.getCoins()){
+                wager = p1.getCoins();
+            }
             p1.setWager(wager);
             totalWager = wager;
         }
-        if (p1.getCoins() > 0) {
+        if (p2.getCoins() > 0) {
             System.out.print(p2.getName() + ": ");
             int wager = scan.nextInt();
+            if(wager>p2.getCoins()){
+                wager = p2.getCoins();
+            }
             totalWager += wager;
             p2.setWager(wager);
         }
-        if (p1.getCoins() > 0) {
+        if (p3.getCoins() > 0) {
             System.out.print(p3.getName() + ": ");
             int wager = scan.nextInt();
+            if(wager>p3.getCoins()){
+                wager = p3.getCoins();
+            }
             totalWager += wager;
             p3.setWager(wager);
         }
@@ -108,7 +116,7 @@ public class Ceelo {
         System.out.print("Player 2, enter your name: ");
         name = scan.nextLine();
         p2 = new Player(name);
-        System.out.print("Player 2, enter your name: ");
+        System.out.print("Player 3, enter your name: ");
         name = scan.nextLine();
         p3 = new Player(name);
     }
@@ -153,9 +161,9 @@ public class Ceelo {
         }
     }
     public void printInfo(){
-        System.out.println("Banker Coins :  " + Banker.bankerCoins + "\nBanker Points: " + Banker.bankerPoints);
-        System.out.println(p1.getName() + " Coins : " + p1.getCoins() + "\n" + p1.getName() + " Points : " + p1.playerPoints);
-        System.out.println(p2.getName() + " Coins : " + p2.getCoins() + "\n" + p2.getName() + " Points : " + p2.playerPoints);
-        System.out.println(p3.getName() + " Coins : " + p3.getCoins() + "\n" + p3.getName() + " Points : " + p3.playerPoints);
+        System.out.println("\nBanker Coins :  " + Banker.bankerCoins + "\nBanker Points: " + Banker.bankerPoints);
+        System.out.println("\n" + p1.getName() + " Coins : " + p1.getCoins() + "\n" + p1.getName() + " Points : " + p1.playerPoints);
+        System.out.println("\n" + p2.getName() + " Coins : " + p2.getCoins() + "\n" + p2.getName() + " Points : " + p2.playerPoints);
+        System.out.println("\n" + p3.getName() + " Coins : " + p3.getCoins() + "\n" + p3.getName() + " Points : " + p3.playerPoints);
     }
 }

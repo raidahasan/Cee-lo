@@ -43,7 +43,7 @@ public class Die {
         printResult(three[1].getRoll());
         printResult(three[2].getRoll());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(2500);
         } catch (Exception e) {
             System.out.println("error");
         }

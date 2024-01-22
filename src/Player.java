@@ -3,8 +3,6 @@ public class Player {
     String name = "";
     int currentAmountWagered;
     int playerPoints;
-    Die die = new Die();
-
     public Player(String name){
         coins = 700;
         this.name = name;
@@ -16,14 +14,14 @@ public class Player {
     public int getCoins(){
         return coins;
     }
+    public void setPlayerPoints(int points){
+        playerPoints = points;
+    }
     public int getCurrentAmountWagered(){
         return currentAmountWagered;
     }
     public void setWager(int wagered){
         currentAmountWagered = wagered;
-    }
-    public void setPlayerPoints(int points){
-        playerPoints = points;
     }
     public void addCoins(int addOrSub){
         coins += addOrSub;

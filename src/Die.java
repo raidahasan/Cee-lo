@@ -30,7 +30,7 @@ public class Die {
         }else if(res==4){
             str+="│  ○   ○  │\n│         │\n│  ○   ○  │";
         }else if(res==5){
-            str+="│  ○   ○  │\n│         │\n│  ○   ○  │";
+            str+="│  ○   ○  │\n│    ○    │\n│  ○   ○  │";
         }else{
             str+="│  ○   ○  │\n│  ○   ○  │\n│  ○   ○  │";
         }
@@ -42,11 +42,6 @@ public class Die {
         printResult(three[0].getRoll());
         printResult(three[1].getRoll());
         printResult(three[2].getRoll());
-        try {
-            Thread.sleep(2500);
-        } catch (Exception e) {
-            System.out.println("error");
-        }
     }
 
     public String determine(){
@@ -57,7 +52,7 @@ public class Die {
         list.add(three[2].getRoll());
         if(list.contains(4)&&list.contains(5)&&list.contains(6)){
             str = "true";
-        }else if((list.get(0)==list.get(1)) && (list.get(2)==list.get(1))){
+        }else if((three[0].getRoll()==three[1].getRoll()) && (three[2].getRoll()==three[1].getRoll()) && (three[2].getRoll()==three[0].getRoll())){
             str = "true";
         }else if(list.contains(1)&&list.contains(2)&&list.contains(3)){
             str = "false";
@@ -83,7 +78,7 @@ public class Die {
         list.add(three[2].getRoll());
         if(list.contains(4)&&list.contains(5)&&list.contains(6)){
             str = "true";
-        }else if((three[0].getRoll()==three[1].getRoll()) && (three[2].getRoll()==three[1].getRoll())){
+        }else if((three[0].getRoll()==three[1].getRoll()) && (three[2].getRoll()==three[1].getRoll()) && (three[2].getRoll()==three[0].getRoll())){
             str = "true";
         }else if(list.contains(1)&&list.contains(2)&&list.contains(3)){
             str = "false";

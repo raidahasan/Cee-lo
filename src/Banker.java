@@ -13,6 +13,11 @@ public class Banker {
         while(g) {
             die.rollThree();
             die.printThree();
+            try {
+                Thread.sleep(2250);
+            } catch (Exception e) {
+                System.out.println("error");
+            }
             if (die.determine().equals("true")) {
                 bankerCoins += Ceelo.getTotalWager();
                 die.determine();

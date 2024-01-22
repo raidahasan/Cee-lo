@@ -5,17 +5,28 @@ public class Ceelo {
     Player p3;
     Scanner scan = new Scanner(System.in);
     private static int totalWager;
-    private boolean gameRunning = true;
+    boolean dcj = true;
+    private static int topScore;
     Die die = new Die();
 
-    public Ceelo(){
-        totalWager = 0;
-        introduce();
-        System.out.println("\nYou are all starting with 700 coins ");
-        play();
-
+    public Ceelo() {
+        while(dcj) {
+            totalWager = 0;
+            System.out.println("\n      Main Menu\n. . . . . . . . . . .\n" + "Top Score: " + topScore + " coins");
+            System.out.println("Enter 'G' to play new game");
+            System.out.println("Enter 'Q' to quit");
+            String enter = scan.nextLine();
+            enter = enter.toLowerCase();
+            if (enter.equals("g")) {
+                introduce();
+                Banker.bankerCoins = 1000;
+                System.out.println("\nYou are all starting with 700 chips ");
+                play();
+            } else {
+                System.exit(0);
+            }
+        }
     }
-
 
     public static int getTotalWager(){return totalWager;}
     public void play() {
@@ -23,28 +34,26 @@ public class Ceelo {
         enterBets();
         System.out.println("\nThe Banker's turn");
         Banker.turn();
-        printInfo();
         if (Banker.getGo()) {
             while (Banker.bankerCoins > 0 && (p1.getCoins() > 0 || p2.getCoins() > 0 || p3.getCoins() > 0)) {
                 if (p1.getCoins() > 0) {
                     System.out.println("\n"  + p1.getName() + "'s turn");
                     playerTurn(p1);
-                    System.out.println("\n" + p1.getName() + " Coins : " + p1.getCoins() + "\n" + p1.getName() + " Points : " + p1.playerPoints + "\n");
+                    System.out.println("\n" + p1.getName() + " Chips : " + p1.getCoins() + "\n" + p1.getName() + " Points : " + p1.playerPoints + "\n");
                 }
                 if (p2.getCoins() > 0) {
                     System.out.println("\n" +p2.getName() + "'s turn");
                     playerTurn(p2);
-                    System.out.println("\n" + p2.getName() + " Coins : " + p2.getCoins() + "\n" + p2.getName() + " Points : " + p2.playerPoints + "\n");
+                    System.out.println("\n" + p2.getName() + " Chips : " + p2.getCoins() + "\n" + p2.getName() + " Points : " + p2.playerPoints + "\n");
                 }
                 if (p3.getCoins() > 0) {
                     System.out.println("\n" + p3.getName() + "'s turn");
                     playerTurn(p3);
-                    System.out.println("\n" + p3.getName() + " Coins : " + p3.getCoins() + "\n" + p3.getName() + " Points : " + p3.playerPoints + "\n");
+                    System.out.println("\n" + p3.getName() + " Chips : " + p3.getCoins() + "\n" + p3.getName() + " Points : " + p3.playerPoints + "\n");
 
                 }
                 if(p1.getCoins()<=0 && p2.getCoins()<=0 && p3.getCoins()<=0){
                     printInfo();
-                    System.exit(0);
                 }
                 if(Banker.bankerCoins>0) {
                     printInfo();
@@ -56,25 +65,45 @@ public class Ceelo {
             }
             if (p1.getCoins() > p2.getCoins() && p1.getCoins() > p2.getCoins()) {
                 System.out.println("You broke the bank! " + p1.getName() + " wins!");
-                System.exit(0);
+                if(p1.getCoins()>topScore){
+                    topScore = p1.getCoins();
+                }
             } else if (p2.getCoins() > p3.getCoins() && p2.getCoins() > p1.getCoins()) {
                 System.out.println("You broke the bank! " + p2.getName() + " wins!");
-                System.exit(0);
+                if(p2.getCoins()>topScore){
+                    topScore = p2.getCoins();
+                }
             } else if (p3.getCoins() > p2.getCoins() && p3.getCoins() > p1.getCoins()) {
                 System.out.println("You broke the bank! " + p3.getName() + " wins!");
-                System.exit(0);
-            } else {
+                if(p3.getCoins()>topScore){
+                    topScore = p3.getCoins();
+                }
+            }else if((p1.getCoins()<=0 && p2.getCoins()<=0 && p3.getCoins()<=0) && Banker.bankerCoins>0) {
+                printInfo();
+                System.out.println("The Banker won\n");
+            }else{
                 System.out.println("You broke the bank! There is a tie between players ");
                 printInfo();
-                System.exit(0);
+                if(p1.getCoins()==p2.getCoins()){
+                    if(p2.getCoins()>topScore){
+                        topScore = p2.getCoins();
+                    }
+                }else if(p1.getCoins()==p3.getCoins()){
+                    if(p3.getCoins()>topScore){
+                        topScore = p3.getCoins();
+                    }
+                }else{
+                    if(p2.getCoins()>topScore){
+                        topScore = p2.getCoins();
+                    }
+                }
             }
         }else if(Banker.getwinOrLose()){
-            System.out.println("The Banker won");
+            System.out.println("The Banker won\n");
             p1.addCoins(p1.getCurrentAmountWagered()*-1);
             p2.addCoins(p2.getCurrentAmountWagered()*-1);
             p3.addCoins(p3.getCurrentAmountWagered()*-1);
-        }else{
-            System.out.println("The Banker lost");
+            printInfo();
         }
     }
 
@@ -83,6 +112,7 @@ public class Ceelo {
         if (p1.getCoins() > 0) {
             System.out.print(p1.getName() + ": ");
             int wager = scan.nextInt();
+            scan.nextLine();
             if(wager>p1.getCoins()){
                 wager = p1.getCoins();
             }
@@ -92,6 +122,7 @@ public class Ceelo {
         if (p2.getCoins() > 0) {
             System.out.print(p2.getName() + ": ");
             int wager = scan.nextInt();
+            scan.nextLine();
             if(wager>p2.getCoins()){
                 wager = p2.getCoins();
             }
@@ -101,6 +132,7 @@ public class Ceelo {
         if (p3.getCoins() > 0) {
             System.out.print(p3.getName() + ": ");
             int wager = scan.nextInt();
+            scan.nextLine();
             if(wager>p3.getCoins()){
                 wager = p3.getCoins();
             }
@@ -124,6 +156,8 @@ public class Ceelo {
         Die die = new Die();
         boolean result = true;
         while (result) {
+            System.out.print("Enter key to roll: ");
+            String reroll = scan.nextLine();
             die.rollThree();
             die.printThree();
             if (die.determine(player).equals("true")) {
@@ -161,9 +195,23 @@ public class Ceelo {
         }
     }
     public void printInfo(){
-        System.out.println("\nBanker Coins :  " + Banker.bankerCoins + "\nBanker Points: " + Banker.bankerPoints);
-        System.out.println("\n" + p1.getName() + " Coins : " + p1.getCoins() + "\n" + p1.getName() + " Points : " + p1.playerPoints);
-        System.out.println("\n" + p2.getName() + " Coins : " + p2.getCoins() + "\n" + p2.getName() + " Points : " + p2.playerPoints);
-        System.out.println("\n" + p3.getName() + " Coins : " + p3.getCoins() + "\n" + p3.getName() + " Points : " + p3.playerPoints);
+        System.out.println("\nBanker Chips :  " + Banker.bankerCoins + "\nBanker Points: " + Banker.bankerPoints);
+        if(p1.getCoins()>0){
+            System.out.println("\n" + p1.getName() + " Chips : " + p1.getCoins() + "\n" + p1.getName() + " Points : " + p1.playerPoints);
+        }else{
+            System.out.println(p1.getName() + " is out of the game");
+        }
+        if(p2.getCoins()>0){
+            System.out.println("\n" + p2.getName() + " Chips : " + p2.getCoins() + "\n" + p2.getName() + " Points : " + p2.playerPoints);
+
+        }else{
+            System.out.println(p2.getName() + " is out of the game");
+        }
+        if(p3.getCoins()>0){
+            System.out.println("\n" + p3.getName() + " Chips : " + p3.getCoins() + "\n" + p3.getName() + " Points : " + p3.playerPoints);
+
+        }else{
+            System.out.println(p3.getName() + " is out of the game");
+        }
     }
 }
